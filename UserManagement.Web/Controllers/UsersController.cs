@@ -12,7 +12,7 @@ public class UsersController : Controller
     public UsersController(IUserService userService) => _userService = userService;
 
     [HttpGet("all")]
-    public ViewResult List()
+    public ViewResult List(bool active, bool inactive)
     {
         var items = _userService.GetAll().Select(p => new UserListItemViewModel
         {
@@ -23,6 +23,9 @@ public class UsersController : Controller
             DateOfBirth = p.DateOfBirth,
             IsActive = p.IsActive
         });
+
+        if(active) items = items.Where(x => x.IsActive);
+        if(inactive) items = items.Where(y => !y.IsActive);
 
         var model = new UserListViewModel
         {
