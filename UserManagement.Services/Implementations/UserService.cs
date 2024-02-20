@@ -17,6 +17,8 @@ public class UserService : IUserService
         _dataAccess.Create(user);
     }
 
+    public void DeleteUser(User user) => _dataAccess.Delete(user);
+
     /// <summary>
     /// Return users by active state
     /// </summary>

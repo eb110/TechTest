@@ -45,7 +45,11 @@
                             <ul class="dropdown-menu" aria-labelledby="btnToggleActions">
                                 <li><a class="dropdown-item" asp-controller="Users" asp-action="User" asp-route-id="@item.Id">View</a></li>
                                 <li><a class="dropdown-item" asp-controller="Users" asp-action="Edit" asp-route-id="@item.Id">Edit</a></li>
-                                <li><a class="dropdown-item" href="#">Delete</a></li>
+                                <li>
+                                    <form method="post">
+                                        <button type="action" class="dropdown-item" asp-controller="Users" asp-action="Delete" asp-route-id="@item.Id">Delete</button>
+                                    </form>
+                                </li>
                             </ul>
                         </div>
                     </td>

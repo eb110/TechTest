@@ -87,7 +87,7 @@ public class UsersController : Controller
         return View(null);
     }
 
-    [HttpPost("edit")]
+    [HttpPost("edit/{id}")]
     public IActionResult Edit(UserListItemViewModel userModel)
     {
         var user = _userService.GetById(userModel.Id);
@@ -100,6 +100,16 @@ public class UsersController : Controller
             _userService.UpdateUser(user);
         }
 
-        return RedirectToAction("All", "Student");
+        return RedirectToAction("All", "Users");
+    }
+
+    [HttpPost("delete")]
+    public IActionResult Delete(long id)
+    {
+        var user = _userService.GetById(id);
+        if (user != null)
+            _userService.DeleteUser(user);
+
+        return RedirectToAction("All", "Users");
     }
 }
