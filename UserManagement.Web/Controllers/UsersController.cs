@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
 
@@ -10,7 +11,7 @@ public class UsersController : Controller
     private readonly IUserService _userService;
     public UsersController(IUserService userService) => _userService = userService;
 
-    [HttpGet]
+    [HttpGet("all")]
     public ViewResult List()
     {
         var items = _userService.GetAll().Select(p => new UserListItemViewModel
@@ -19,6 +20,7 @@ public class UsersController : Controller
             Forename = p.Forename,
             Surname = p.Surname,
             Email = p.Email,
+            DateOfBirth = p.DateOfBirth,
             IsActive = p.IsActive
         });
 
@@ -28,5 +30,20 @@ public class UsersController : Controller
         };
 
         return View(model);
+    }
+
+    [HttpGet("add")]
+    public ViewResult Add()
+    {
+        return View();
+    }
+
+    [HttpPost("add")]
+    public IActionResult Add(UserModel viewModel)
+    {
+        var user = new User { Forename = viewModel.Forename, Surname = viewModel.Surname, Email = viewModel.Email, DateOfBirth = viewModel.DateOfBirth };
+        _userService.Add(user);
+        var users = _userService.GetAll().ToList();
+        return RedirectToAction("All", "Users");
     }
 }
