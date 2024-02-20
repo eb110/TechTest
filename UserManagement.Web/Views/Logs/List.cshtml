@@ -1,0 +1,44 @@
+﻿@model UserManagement.Web.Models.Logs.LogListViewModel
+
+<h1>Logs</h1>
+
+@if (Model is null || Model.Logs.Count == 0)
+{
+    <p>No logs were found</p>
+}
+
+else
+{
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Type</th>
+                    <th>Create At</th>
+                    <th>User Id</th>
+                    <th style="width: 1px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Logs)
+                {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Type
+                        </td>
+                        <td>
+                            @item.Created
+                        </td>
+                        <td>
+                            @item.UserId
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

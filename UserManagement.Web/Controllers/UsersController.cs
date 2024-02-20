@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+using UserManagement.Data.Entities;
 using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 using UserManagement.Web.Models.Users;
@@ -45,8 +47,8 @@ public class UsersController : Controller
     public IActionResult Add(UserModel viewModel)
     {
         var user = new User { Forename = viewModel.Forename, Surname = viewModel.Surname, Email = viewModel.Email, DateOfBirth = viewModel.DateOfBirth };
+        user.AddLog(new Log { UserId = 1, Type = "Created", Created = DateTime.Now });
         _userService.Add(user);
-        var users = _userService.GetAll().ToList();
         return RedirectToAction("All", "Users");
     }
 

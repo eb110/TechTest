@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UserManagement.Data;
+using UserManagement.Data.Entities;
 using UserManagement.Models;
 using UserManagement.Services.Domain.Interfaces;
 
@@ -31,5 +32,6 @@ public class UserService : IUserService
 
     public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
     public User? GetById(long id) => _dataAccess.GetById<User>(id);
+    public IEnumerable<Log> GetLogs() => _dataAccess.GetAll<Log>();
     public void UpdateUser(User user) => _dataAccess.Update(user);
 }
