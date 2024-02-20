@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using UserManagement.Data.Entities;
 using UserManagement.Models;
 
 namespace UserManagement.Data;
@@ -19,14 +17,12 @@ public class DataContext : DbContext, IDataContext
         model.Entity<User>().HasData(new[]
         {
             new User { Id = 1, Forename = "Peter", Surname = "Loew", Email = "ploew@example.com", IsActive = true, DateOfBirth = new DateTime(1978, 07, 17) },
-       //     Logs = new List<Log>(){new Log{UserId = 1, Type = "Created", Created = DateTime.Now} } },
             new User { Id = 2, Forename = "Benjamin Franklin", Surname = "Gates", Email = "bfgates@example.com", IsActive = true, DateOfBirth = new DateTime(1968, 07, 17)  },
             new User { Id = 3, Forename = "Castor", Surname = "Troy", Email = "ctroy@example.com", IsActive = false, DateOfBirth = new DateTime(1988, 07, 17)  },
             new User { Id = 4, Forename = "Memphis", Surname = "Raines", Email = "mraines@example.com", IsActive = true, DateOfBirth = new DateTime(1998, 07, 17)  },
             new User { Id = 7, Forename = "Cameron", Surname = "Poe", Email = "cpoe@example.com", IsActive = false, DateOfBirth = new DateTime(1978, 07, 21)  },
             new User { Id = 8, Forename = "Edward", Surname = "Malus", Email = "emalus@example.com", IsActive = false, DateOfBirth = new DateTime(1978, 07, 22)  },
         });
-
     }
 
     public DbSet<User>? Users { get; set; }

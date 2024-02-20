@@ -26,8 +26,8 @@ public class UsersController : Controller
             IsActive = p.IsActive
         });
 
-        if(active) items = items.Where(x => x.IsActive);
-        if(inactive) items = items.Where(y => !y.IsActive);
+        if (active) items = items.Where(x => x.IsActive);
+        if (inactive) items = items.Where(y => !y.IsActive);
 
         var model = new UserListViewModel
         {
@@ -47,8 +47,10 @@ public class UsersController : Controller
     public IActionResult Add(UserModel viewModel)
     {
         var user = new User { Forename = viewModel.Forename, Surname = viewModel.Surname, Email = viewModel.Email, DateOfBirth = viewModel.DateOfBirth };
-        user.AddLog(new Log { UserId = 1, Type = "Created", Created = DateTime.Now });
         _userService.Add(user);
+        var users = _userService.GetAll().ToList();
+        users[users.Count - 1].AddLog(new Log { UserId = 1, Type = "Created", Created = DateTime.Now });
+        _userService.UpdateUser(users[users.Count - 1]);
         return RedirectToAction("All", "Users");
     }
 
@@ -56,8 +58,9 @@ public class UsersController : Controller
     public ViewResult View(long id)
     {
         var user = _userService.GetById(id);
-        if(user != null)
+        if (user != null)
         {
+            user.AddLog(new Log { UserId = id, Type = "Viewed", Created = DateTime.Now });
             var userListItem = new UserListItemViewModel
             {
                 Id = user.Id,
@@ -67,6 +70,7 @@ public class UsersController : Controller
                 DateOfBirth = user.DateOfBirth,
                 IsActive = user.IsActive
             };
+            _userService.UpdateUser(user);
             return View(userListItem);
         }
         return View(null);
@@ -102,6 +106,7 @@ public class UsersController : Controller
             user.Surname = userModel.Surname;
             user.Email = userModel.Email;
             user.DateOfBirth = userModel.DateOfBirth;
+            user.AddLog(new Log { UserId = userModel.Id, Type = "Edited", Created = DateTime.Now });
             _userService.UpdateUser(user);
         }
 
@@ -112,8 +117,13 @@ public class UsersController : Controller
     public IActionResult Delete(long id)
     {
         var user = _userService.GetById(id);
+
         if (user != null)
+        {
+            user.AddLog(new Log { UserId = id, Type = "Edited", Created = DateTime.Now });
+            _userService.UpdateUser(user);
             _userService.DeleteUser(user);
+        }
 
         return RedirectToAction("All", "Users");
     }

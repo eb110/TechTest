@@ -54,3 +54,23 @@ Some ideas are:
 
 * Please feel free to change or refactor any code that has been supplied within the solution and think about clean maintainable code and architecture when extending the project.
 * If any additional packages, tools or setup are required to run your completed version, please document these thoroughly.
+
+## Response
+
+## Section 1
+
+* The 'IsActive' functionality has been developed.
+
+## Section 2
+
+* Extra parameter has been added.
+
+## Section 3
+
+* The entire crud for the user has been developed.
+
+## Section 4
+
+* The 'log' view and controller has been implemented.
+* The user controller has been updated to dynamically update the 'Log' flow
+* Logs are created upon 'creation, view and edition' of every user.
