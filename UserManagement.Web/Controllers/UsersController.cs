@@ -47,7 +47,7 @@ public class UsersController : Controller
         return RedirectToAction("All", "Users");
     }
 
-    [HttpGet("user{id}")]
+    [HttpGet("user/{id}")]
     public ViewResult View(long id)
     {
         var user = _userService.GetById(id);
@@ -65,5 +65,41 @@ public class UsersController : Controller
             return View(userListItem);
         }
         return View(null);
+    }
+
+    [HttpGet("edit/{Id}")]
+    public ViewResult Edit(long Id)
+    {
+        var user = _userService.GetById(Id);
+        if (user != null)
+        {
+            var userListItem = new UserListItemViewModel
+            {
+                Id = user.Id,
+                Forename = user.Forename,
+                Surname = user.Surname,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth,
+                IsActive = user.IsActive
+            };
+            return View(userListItem);
+        }
+        return View(null);
+    }
+
+    [HttpPost("edit")]
+    public IActionResult Edit(UserListItemViewModel userModel)
+    {
+        var user = _userService.GetById(userModel.Id);
+        if (user != null)
+        {
+            user.Forename = userModel.Forename;
+            user.Surname = userModel.Surname;
+            user.Email = userModel.Email;
+            user.DateOfBirth = userModel.DateOfBirth;
+            _userService.UpdateUser(user);
+        }
+
+        return RedirectToAction("All", "Student");
     }
 }
