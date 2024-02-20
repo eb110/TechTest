@@ -1,0 +1,36 @@
+﻿@model UserManagement.Web.Models.Users.UserListItemViewModel
+
+<h1>View User</h1>
+
+@if (Model is null)
+{
+    <p>No user was found with this Id</p>
+}
+
+else
+{
+    <div class="mt-3">
+        <label class="form-label">Id</label>
+        <span>: @Model.Id</span>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">Forename</label>
+        <span>: @Model.Forename</span>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">Surname</label>
+        <span>: @Model.Surname</span>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">Email</label>
+        <span>: @Model.Email</span>
+    </div>
+    <div class="mt-3">
+        <label class="form-label">Date Of Birth</label>
+        <span>: @Model.DateOfBirth.ToString("yyyy-MM-dd")</span>
+    </div>
+
+    <a class="btn btn-primary float-end" asp-controller="Users" asp-action="All">
+        Back to List
+    </a>
+}

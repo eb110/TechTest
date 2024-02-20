@@ -43,7 +43,7 @@
                                 Actions
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="btnToggleActions">
-                                <li><a class="dropdown-item" href="#">View</a></li>
+                                <li><a class="dropdown-item" asp-controller="Users" asp-action="User" asp-route-id="@item.Id">View</a></li>
                                 <li><a class="dropdown-item" href="#">Edit</a></li>
                                 <li><a class="dropdown-item" href="#">Delete</a></li>
                             </ul>
@@ -62,7 +62,7 @@
         <a href="#" class="btn btn-default">Non Active</a>
     </div>
 
-    <a href="#" class="btn btn-primary float-end">
+    <a class="btn btn-primary float-end" asp-controller="Users" asp-action="Add">
         Add User
     </a>
 </div>

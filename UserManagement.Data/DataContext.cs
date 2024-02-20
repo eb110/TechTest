@@ -50,4 +50,6 @@ public class DataContext : DbContext, IDataContext
         base.Remove(entity);
         SaveChanges();
     }
+
+    public TEntity? GetById<TEntity>(long Id) where TEntity : class => base.Find<TEntity>(Id);
 }

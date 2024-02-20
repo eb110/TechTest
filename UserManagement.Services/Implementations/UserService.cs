@@ -28,4 +28,5 @@ public class UserService : IUserService
     }
 
     public IEnumerable<User> GetAll() => _dataAccess.GetAll<User>();
+    public User? GetById(long id) => _dataAccess.GetById<User>(id);
 }

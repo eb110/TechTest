@@ -46,4 +46,24 @@ public class UsersController : Controller
         var users = _userService.GetAll().ToList();
         return RedirectToAction("All", "Users");
     }
+
+    [HttpGet("user{id}")]
+    public ViewResult View(long id)
+    {
+        var user = _userService.GetById(id);
+        if(user != null)
+        {
+            var userListItem = new UserListItemViewModel
+            {
+                Id = user.Id,
+                Forename = user.Forename,
+                Surname = user.Surname,
+                Email = user.Email,
+                DateOfBirth = user.DateOfBirth,
+                IsActive = user.IsActive
+            };
+            return View(userListItem);
+        }
+        return View(null);
+    }
 }

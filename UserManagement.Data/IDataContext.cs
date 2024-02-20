@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 
 namespace UserManagement.Data;
 
@@ -21,7 +20,7 @@ public interface IDataContext
     void Create<TEntity>(TEntity entity) where TEntity : class;
 
     /// <summary>
-    /// Uodate an existing item matching the ID
+    /// Update an existing item matching the ID
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <param name="entity"></param>
@@ -29,4 +28,11 @@ public interface IDataContext
     void Update<TEntity>(TEntity entity) where TEntity : class;
 
     void Delete<TEntity>(TEntity entity) where TEntity : class;
+    /// <summary>
+    /// Get an item by its id
+    /// </summary>
+    /// <typeparam Id="Long"></typeparam>
+    /// <param name="Id"></param>
+    /// <returns></returns>
+    TEntity? GetById<TEntity>(long Id) where TEntity : class;
 }
